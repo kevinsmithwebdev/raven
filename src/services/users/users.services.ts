@@ -1,11 +1,10 @@
 import axios from 'axios';
 import {User} from '../../types/jsonPlaceholder.types';
-
-const USER_URL = 'https://jsonplaceholder.typicode.com/users';
+import {USERS_URL} from '../apiRoutes';
 
 export const loadUsers = async (): Promise<User[] | null> => {
   try {
-    const response = await axios.get<User[]>(USER_URL);
+    const response = await axios.get<User[]>(USERS_URL);
 
     return response.data;
   } catch (err) {

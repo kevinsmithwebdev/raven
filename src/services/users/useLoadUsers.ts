@@ -10,5 +10,5 @@ export interface UseLoadUsersState {
 export const useLoadUsers = (): UseLoadUsersState => {
   const {data: users = null, isLoading} = useQuery('users-data', loadUsers);
 
-  return {users: users, isLoading};
+  return {users, isLoading};
 };

@@ -1,24 +1,24 @@
 import {renderHook, RenderHookResult} from '@testing-library/react-native';
-import {useLoadUsers, UseLoadUsersState} from './useLoadUsers';
 import * as reactQuery from 'react-query';
+import {useLoadAllPosts, UseLoadAllPostsState} from './useLoadAllPosts';
 
-let renderedHook: RenderHookResult<UseLoadUsersState, undefined>;
+let renderedHook: RenderHookResult<UseLoadAllPostsState, undefined>;
 
-describe('useLoadUsers', () => {
+describe('useLoadAllPosts', () => {
   describe('normal flow', () => {
     beforeEach(() => {
       jest.spyOn(reactQuery, 'useQuery').mockReturnValue({
-        data: 'mock-users',
+        data: 'mock-posts',
         isLoading: false,
       } as reactQuery.UseQueryResult);
 
-      renderedHook = renderHook(useLoadUsers);
+      renderedHook = renderHook(useLoadAllPosts);
     });
 
     it('should return data state', () => {
       expect(renderedHook.result.current).toStrictEqual({
         isLoading: false,
-        users: 'mock-users',
+        posts: 'mock-posts',
       });
     });
   });
@@ -30,13 +30,13 @@ describe('useLoadUsers', () => {
         isLoading: true,
       } as reactQuery.UseQueryResult);
 
-      renderedHook = renderHook(useLoadUsers);
+      renderedHook = renderHook(useLoadAllPosts);
     });
 
     it('should return loading state', () => {
       expect(renderedHook.result.current).toStrictEqual({
         isLoading: true,
-        users: null,
+        posts: null,
       });
     });
   });

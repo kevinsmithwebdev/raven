@@ -1,21 +1,22 @@
 import axios from 'axios';
-import {loadUsers} from './users.services';
-import {USERS_URL} from '../apiRoutes';
-import {User} from '../../types/jsonPlaceholder.types';
+import {POSTS_URL} from '../apiRoutes';
+import {Post} from '../../types/jsonPlaceholder.types';
+import {loadAllPosts} from './posts.services';
+
 jest.mock('axios');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-let returnValue: User[] | null;
+let returnValue: Post[] | null;
 
 beforeEach(jest.clearAllMocks);
 
-describe('users services', () => {
-  describe('loadUsers', () => {
+describe('posts services', () => {
+  describe('loadAllPosts', () => {
     describe('happy path', () => {
       beforeEach(async () => {
         mockedAxios.get.mockResolvedValueOnce({data: 'mocked-data'});
 
-        returnValue = await loadUsers();
+        returnValue = await loadAllPosts();
       });
 
       it('should return the correct data', () => {
@@ -23,7 +24,7 @@ describe('users services', () => {
       });
 
       it('should call get with the correct params', () => {
-        expect(mockedAxios.get).toHaveBeenCalledWith(USERS_URL);
+        expect(mockedAxios.get).toHaveBeenCalledWith(POSTS_URL);
       });
     });
 
@@ -34,7 +35,7 @@ describe('users services', () => {
 
       it('should return the correct data', async () => {
         await expect(async () => {
-          await loadUsers();
+          await loadAllPosts();
         }).rejects.toThrow();
       });
     });
