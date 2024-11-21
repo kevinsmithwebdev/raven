@@ -8,11 +8,14 @@
     "lint": "eslint src/**/*.ts[x]",
     "start": "react-native start",
     "test": "jest",
+    "test:dev": "jest --watch --coverage",
     "prettier:write": "npx prettier . --write"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "react": "18.3.1",
-    "react-native": "0.76.2"
+    "react-native": "0.76.2",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

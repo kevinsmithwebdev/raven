@@ -3,11 +3,23 @@ import {render, screen} from '@testing-library/react-native';
 import App from './App';
 
 describe('App', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     render(<App />);
   });
 
-  it('should load safely', () => {
-    expect(screen.getByTestId('app')).toBeTruthy();
+  describe('the component', () => {
+    it('should load safely', () => {
+      const app = screen.getByTestId('app');
+      expect(app).toBeTruthy();
+    });
+  });
+
+  describe('subcomponents', () => {
+    describe('messages list', () => {
+      it('should load safely', () => {
+        const app = screen.getByTestId('messages-list');
+        expect(app).toBeTruthy();
+      });
+    });
   });
 });
