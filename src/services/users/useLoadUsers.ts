@@ -1,14 +1,13 @@
-import {User} from '../../types/jsonPlaceholder.types';
+import {useEffect} from 'react';
 import {loadUsers} from './users.services';
 import {useQuery} from 'react-query';
+import {useUsersZustand} from '../../state/users/users.zustand';
 
-export interface UseLoadUsersState {
-  users: User[] | null;
-  isLoading: boolean;
-}
+export const useLoadUsers = (): void => {
+  const {setUsers} = useUsersZustand();
+  const {data: users = null} = useQuery('users-data', loadUsers);
 
-export const useLoadUsers = (): UseLoadUsersState => {
-  const {data: users = null, isLoading} = useQuery('users-data', loadUsers);
-
-  return {users, isLoading};
+  useEffect(() => {
+    setUsers(users);
+  }, [setUsers, users]);
 };

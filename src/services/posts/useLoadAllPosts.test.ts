@@ -1,43 +1,49 @@
-import {renderHook, RenderHookResult} from '@testing-library/react-native';
+import {renderHook} from '@testing-library/react-native';
 import * as reactQuery from 'react-query';
-import {useLoadAllPosts, UseLoadAllPostsState} from './useLoadAllPosts';
+import {useLoadAllPosts} from './useLoadAllPosts';
+import * as usePostsZustand from '../../state/posts/posts.zustand';
+import {mockPosts} from '../../__mocks__/posts.mocks';
 
-let renderedHook: RenderHookResult<UseLoadAllPostsState, undefined>;
+const setPosts = jest.fn();
+
+beforeEach(jest.clearAllMocks);
 
 describe('useLoadAllPosts', () => {
-  describe('normal flow', () => {
+  describe('with data', () => {
     beforeEach(() => {
+      jest
+        .spyOn(usePostsZustand, 'usePostsZustand')
+        .mockReturnValue({setPosts});
+
       jest.spyOn(reactQuery, 'useQuery').mockReturnValue({
-        data: 'mock-posts',
-        isLoading: false,
+        data: mockPosts,
       } as reactQuery.UseQueryResult);
 
-      renderedHook = renderHook(useLoadAllPosts);
+      renderHook(useLoadAllPosts);
     });
 
-    it('should return data state', () => {
-      expect(renderedHook.result.current).toStrictEqual({
-        isLoading: false,
-        posts: 'mock-posts',
-      });
+    it('should call setPosts with correct posts', () => {
+      expect(setPosts).toHaveBeenCalledTimes(1);
+      expect(setPosts).toHaveBeenCalledWith(mockPosts);
     });
   });
 
-  describe('loading', () => {
+  describe('with no data returned', () => {
     beforeEach(() => {
+      jest
+        .spyOn(usePostsZustand, 'usePostsZustand')
+        .mockReturnValue({setPosts});
+
       jest.spyOn(reactQuery, 'useQuery').mockReturnValue({
         data: undefined,
-        isLoading: true,
       } as reactQuery.UseQueryResult);
 
-      renderedHook = renderHook(useLoadAllPosts);
+      renderHook(useLoadAllPosts);
     });
 
-    it('should return loading state', () => {
-      expect(renderedHook.result.current).toStrictEqual({
-        isLoading: true,
-        posts: null,
-      });
+    it('should call setPosts with correct posts', () => {
+      expect(setPosts).toHaveBeenCalledTimes(1);
+      expect(setPosts).toHaveBeenCalledWith(null);
     });
   });
 });

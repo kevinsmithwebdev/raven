@@ -1,14 +1,14 @@
 import {useQuery} from 'react-query';
 import {loadAllPosts} from './posts.services';
-import {Post} from '../../types/jsonPlaceholder.types';
+import {usePostsZustand} from '../../state/posts/posts.zustand';
+import {useEffect} from 'react';
 
-export interface UseLoadAllPostsState {
-  posts: Post[] | null;
-  isLoading: boolean;
-}
+export const useLoadAllPosts = (): void => {
+  const {setPosts} = usePostsZustand();
 
-export const useLoadAllPosts = (): UseLoadAllPostsState => {
-  const {data: posts = null, isLoading} = useQuery('posts-data', loadAllPosts);
+  const {data: posts = null} = useQuery('posts-data', loadAllPosts);
 
-  return {posts, isLoading};
+  useEffect(() => {
+    setPosts(posts);
+  }, [posts, setPosts]);
 };

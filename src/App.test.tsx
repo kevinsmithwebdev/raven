@@ -17,7 +17,7 @@ describe('App', () => {
   describe('subcomponents', () => {
     describe('messages list', () => {
       it('should load safely', () => {
-        const app = screen.getByTestId('messages-list');
+        const app = screen.getByTestId('posts-list');
         expect(app).toBeTruthy();
       });
     });
