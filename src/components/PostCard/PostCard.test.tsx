@@ -1,31 +1,41 @@
 import React from 'react';
-import {Post, User} from '../../types/jsonPlaceholder.types';
-import {render, screen} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import PostCard from './PostCard';
 import * as useUsersZustand from '../../state/users/users.zustand';
+import {mockPosts} from '../../__mocks__/posts.mocks';
+import {mockUsers} from '../../__mocks__/users.mocks';
 
-const mockPost = {
-  title: 'mock title 123',
-  userId: 127,
-} as Post;
+const mockNavigate = jest.fn();
+
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: mockNavigate,
+    }),
+  };
+});
+
+const mockPost = mockPosts[42];
 
 const mockPostWithUnknownUser = {
-  title: 'mock title 123',
+  ...mockPost,
   userId: -1,
-} as Post;
+};
 
-const mockUser = {
-  name: 'Mary Userton',
-} as User;
+const mockUser = mockUsers[7];
 
-const getUserById = (userId: number) => (userId === 127 ? mockUser : undefined);
+const getUserById = (userId: number) => (userId === 5 ? mockUser : undefined);
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  jest.spyOn(useUsersZustand, 'useUsersZustand').mockReturnValue({getUserById});
+});
 
 describe('PostCard', () => {
   describe('with good data', () => {
     beforeEach(() => {
-      jest
-        .spyOn(useUsersZustand, 'useUsersZustand')
-        .mockReturnValue({getUserById});
       render(<PostCard {...mockPost} />);
     });
 
@@ -40,9 +50,6 @@ describe('PostCard', () => {
 
   describe('with no user found', () => {
     beforeEach(() => {
-      jest
-        .spyOn(useUsersZustand, 'useUsersZustand')
-        .mockReturnValue({getUserById});
       render(<PostCard {...mockPostWithUnknownUser} />);
     });
 
@@ -52,6 +59,19 @@ describe('PostCard', () => {
 
     it('should have no user name', () => {
       expect(screen.getByText('N/A')).toBeTruthy();
+    });
+  });
+
+  describe('pressing card', () => {
+    beforeEach(() => {
+      render(<PostCard {...mockPost} />);
+
+      fireEvent.press(screen.getByRole('button', {name: 'post card'}));
+    });
+
+    it('should call navigation with the correct params', () => {
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('PostView', {postId: 43});
     });
   });
 });

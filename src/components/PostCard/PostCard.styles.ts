@@ -1,20 +1,28 @@
 import {StyleSheet} from 'react-native';
 
+const shadowProps = {
+  shadowOffset: {
+    width: 2,
+    height: 2,
+  },
+  shadowColor: '#444',
+  shadowOpacity: 0.5,
+  shadowRadius: 2,
+  elevation: 10,
+};
+
 export const styles = StyleSheet.create({
-  wrapper: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 4,
-    backgroundColor: '#fff',
+  container: {
     margin: 8,
+    backgroundColor: 'white',
+    borderRadius: 4,
+    ...shadowProps,
+  },
+  wrapper: {
     padding: 8,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    elevation: 4,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#ccc',
   },
   titleText: {
     fontWeight: 600,

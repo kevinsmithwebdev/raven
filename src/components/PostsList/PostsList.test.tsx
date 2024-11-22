@@ -4,12 +4,14 @@ import {render, screen} from '@testing-library/react-native';
 import PostsList from './PostsList';
 import {mockPosts} from '../../__mocks__/posts.mocks';
 
+jest.mock('@react-navigation/native');
+
 describe('PostsList', () => {
   describe('with data', () => {
     beforeEach(() => {
       jest
         .spyOn(usePostsZustand, 'usePostsZustand')
-        .mockReturnValueOnce({posts: mockPosts});
+        .mockReturnValue({posts: mockPosts});
 
       render(<PostsList />);
     });
