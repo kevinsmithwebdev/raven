@@ -1,18 +1,26 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {useGetPostId} from './hooks/useGetPostId';
+import {ScrollView} from 'react-native';
+import {styles} from './PostView.styles';
+import PostViewPost from './PostViewPost/PostViewPost';
+import PostViewUser from './PostViewUser/PostViewUser';
+import PostViewComments from './PostViewComments/PostViewComments';
+import {useGetPostViewData} from './hooks/useGetPostViewData';
 
 const PostView = () => {
-  const postId = useGetPostId();
+  const {post, user, comments} = useGetPostViewData();
 
-  if (postId === null) {
+  if (!post) {
     return null;
   }
 
   return (
-    <View testID="post-view">
-      <Text>{`Post View, post ${postId}`}</Text>
-    </View>
+    <ScrollView testID="post-view" style={styles.wrapper}>
+      <PostViewPost post={post} />
+
+      <PostViewUser user={user} />
+
+      <PostViewComments comments={comments} />
+    </ScrollView>
   );
 };
 

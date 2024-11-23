@@ -2,6 +2,7 @@ import axios from 'axios';
 import {POSTS_URL} from '../apiRoutes';
 import {Post} from '../../types/jsonPlaceholder.types';
 import {loadAllPosts} from './posts.services';
+import {mockPosts} from '../../__mocks__/posts.mocks';
 
 jest.mock('axios');
 
@@ -14,13 +15,13 @@ describe('posts services', () => {
   describe('loadAllPosts', () => {
     describe('happy path', () => {
       beforeEach(async () => {
-        mockedAxios.get.mockResolvedValueOnce({data: 'mocked-data'});
+        mockedAxios.get.mockResolvedValueOnce({data: mockPosts});
 
         returnValue = await loadAllPosts();
       });
 
       it('should return the correct data', () => {
-        expect(returnValue).toBe('mocked-data');
+        expect(returnValue).toStrictEqual(mockPosts);
       });
 
       it('should call get with the correct params', () => {
