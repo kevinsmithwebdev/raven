@@ -10,8 +10,23 @@ const NavigationStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Landing" component={Landing} />
-        <Stack.Screen name="PostView" component={PostView} />
+        <Stack.Screen
+          name="Landing"
+          component={Landing}
+          options={{
+            title: 'Raven Message App',
+          }}
+        />
+        <Stack.Screen
+          name="PostView"
+          component={PostView}
+          options={({route}) => {
+            console.log('asdf route', route);
+            return {
+              title: `Post: ${route.params.postName}`,
+            };
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

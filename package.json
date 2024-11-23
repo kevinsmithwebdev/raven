@@ -8,6 +8,7 @@
     "lint": "eslint src/**/*.ts[x]",
     "start": "react-native start",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:dev": "jest --watch --coverage",
     "prettier:write": "npx prettier . --write"
   },
