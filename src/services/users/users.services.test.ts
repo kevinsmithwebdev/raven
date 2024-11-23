@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {loadUsers} from './users.services';
-import {USERS_URL} from '../apiRoutes';
+import {USERS_URL} from '../../constants/apiRoutes';
 import {User} from '../../types/jsonPlaceholder.types';
 import {mockUsers} from '../../__mocks__/users.mocks';
 jest.mock('axios');

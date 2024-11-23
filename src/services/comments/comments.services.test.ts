@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {COMMENTS_URL} from '../apiRoutes';
+import {COMMENTS_URL} from '../../constants/apiRoutes';
 import {Comment} from '../../types/jsonPlaceholder.types';
 import {loadCommentsByPostId} from './comments.services';
 import {mockComments} from '../../__mocks__/comments.mocks';

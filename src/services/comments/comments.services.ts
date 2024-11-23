@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Comment} from '../../types/jsonPlaceholder.types';
-import {COMMENTS_URL} from '../apiRoutes';
+import {COMMENTS_URL} from '../../constants/apiRoutes';
 
 export const loadCommentsByPostId = async (
   postId: number | null,

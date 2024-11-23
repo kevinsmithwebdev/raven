@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   wrapper: {
-    margin: 8,
+    padding: 8,
   },
   section: {
     marginVertical: 4,

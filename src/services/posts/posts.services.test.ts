@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {POSTS_URL} from '../apiRoutes';
+import {POSTS_URL} from '../../constants/apiRoutes';
 import {Post} from '../../types/jsonPlaceholder.types';
 import {loadAllPosts} from './posts.services';
 import {mockPosts} from '../../__mocks__/posts.mocks';

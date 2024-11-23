@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {User} from '../../types/jsonPlaceholder.types';
-import {USERS_URL} from '../apiRoutes';
+import {USERS_URL} from '../../constants/apiRoutes';
 
 export const loadUsers = async (): Promise<User[] | null> => {
   try {

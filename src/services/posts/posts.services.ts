@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Post} from '../../types/jsonPlaceholder.types';
-import {POSTS_URL} from '../apiRoutes';
+import {POSTS_URL} from '../../constants/apiRoutes';
 
 export const loadAllPosts = async (): Promise<Post[] | null> => {
   try {
