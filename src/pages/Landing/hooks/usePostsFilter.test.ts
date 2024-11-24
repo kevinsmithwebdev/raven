@@ -7,6 +7,8 @@ import {UsePostFilterState, usePostsFilter} from './usePostsFilter';
 import {act} from 'react';
 import {DeviceEventEmitter} from 'react-native';
 import {EVENTS} from '../../../constants/events';
+import * as usePostsZustand from '../../../state/posts/posts.zustand';
+import {mockPosts} from '../../../__mocks__/posts.mocks';
 
 let renderedHook: RenderHookResult<UsePostFilterState, undefined>;
 
@@ -21,6 +23,7 @@ const expectedInitialState: UsePostFilterState = {
   closeFilterModal: expect.any(Function),
   selectedFilterUserId: null,
   setSelectedFilterUserId: expect.any(Function),
+  filteredPosts: null,
 };
 
 beforeEach(jest.clearAllMocks);
@@ -99,7 +102,7 @@ describe('usePostsFilter', () => {
       });
     });
 
-    describe('closeFilterModalt', () => {
+    describe('closeFilterModal', () => {
       beforeEach(() => {
         renderedHook = renderHook(usePostsFilter);
 
@@ -114,6 +117,79 @@ describe('usePostsFilter', () => {
 
       it('should return the correct new state, with modal closed', () => {
         expect(renderedHook.result.current).toStrictEqual(expectedInitialState);
+      });
+    });
+
+    describe('filtering', () => {
+      describe('no selectedFilterUserId', () => {
+        beforeEach(() => {
+          jest
+            .spyOn(usePostsZustand, 'usePostsZustand')
+            .mockReturnValue({posts: mockPosts});
+
+          renderedHook = renderHook(usePostsFilter);
+
+          waitFor(() =>
+            expect(renderedHook.result.current.selectedFilterUserId).toBeNull(),
+          );
+        });
+
+        it('should return all posts for filtered posts', () => {
+          expect(renderedHook.result.current.filteredPosts).toStrictEqual(
+            mockPosts,
+          );
+        });
+      });
+
+      describe('with selectedFilterUserId', () => {
+        const selectedFilterId = 4;
+
+        beforeEach(() => {
+          jest
+            .spyOn(usePostsZustand, 'usePostsZustand')
+            .mockReturnValue({posts: mockPosts});
+
+          renderedHook = renderHook(usePostsFilter);
+
+          act(() =>
+            renderedHook.result.current.setSelectedFilterUserId(
+              selectedFilterId,
+            ),
+          );
+
+          waitFor(() =>
+            expect(renderedHook.result.current.selectedFilterUserId).toBe(
+              selectedFilterId,
+            ),
+          );
+        });
+
+        it('should return filtered posts', () => {
+          const expectedFilteredPosts = mockPosts.filter(
+            post => post.userId === selectedFilterId,
+          );
+          expect(renderedHook.result.current.filteredPosts).toStrictEqual(
+            expectedFilteredPosts,
+          );
+        });
+      });
+
+      describe('no posts', () => {
+        beforeEach(() => {
+          jest
+            .spyOn(usePostsZustand, 'usePostsZustand')
+            .mockReturnValue({posts: null});
+
+          renderedHook = renderHook(usePostsFilter);
+
+          waitFor(() =>
+            expect(renderedHook.result.current.selectedFilterUserId).toBeNull(),
+          );
+        });
+
+        it('should return all posts for filtered posts', () => {
+          expect(renderedHook.result.current.filteredPosts).toBeNull();
+        });
       });
     });
   });

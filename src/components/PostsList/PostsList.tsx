@@ -2,7 +2,11 @@ import {ActivityIndicator, FlatList, View} from 'react-native';
 import React from 'react';
 import PostCard from '../PostCard/PostCard';
 import {styles} from './PostsList.styles';
-import {usePostsZustand} from '../../state/posts/posts.zustand';
+import {Post} from '../../types/jsonPlaceholder.types';
+
+interface PostsListProps {
+  filteredPosts: Post[] | null;
+}
 
 const ListEmptyComponent = () => (
   <View style={styles.loaderWrapper} testID="loading-indicator">
@@ -10,14 +14,16 @@ const ListEmptyComponent = () => (
   </View>
 );
 
-const PostsList = () => {
-  const {posts} = usePostsZustand();
+const PostsList = ({filteredPosts}: PostsListProps) => {
+  if (!filteredPosts) {
+    return null;
+  }
 
   return (
     <View testID="posts-list">
       <FlatList
         ListEmptyComponent={ListEmptyComponent}
-        data={posts}
+        data={filteredPosts}
         renderItem={({item}) => <PostCard {...item} />}
       />
     </View>

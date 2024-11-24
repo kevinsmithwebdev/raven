@@ -1,5 +1,4 @@
 import React from 'react';
-import * as usePostsZustand from '../../state/posts/posts.zustand';
 import {render, screen} from '@testing-library/react-native';
 import PostsList from './PostsList';
 import {mockPosts} from '../../__mocks__/posts.mocks';
@@ -9,11 +8,7 @@ jest.mock('@react-navigation/native');
 describe('PostsList', () => {
   describe('with data', () => {
     beforeEach(() => {
-      jest
-        .spyOn(usePostsZustand, 'usePostsZustand')
-        .mockReturnValue({posts: mockPosts});
-
-      render(<PostsList />);
+      render(<PostsList filteredPosts={mockPosts} />);
     });
 
     it('should render list component', () => {
@@ -29,13 +24,9 @@ describe('PostsList', () => {
     });
   });
 
-  describe('with no data', () => {
+  describe('with empty data', () => {
     beforeEach(() => {
-      jest
-        .spyOn(usePostsZustand, 'usePostsZustand')
-        .mockReturnValueOnce({posts: null});
-
-      render(<PostsList />);
+      render(<PostsList filteredPosts={[]} />);
     });
 
     it('should render list component', () => {
@@ -48,6 +39,16 @@ describe('PostsList', () => {
 
     it('should render loading spinner', () => {
       expect(screen.getByTestId('loading-indicator')).toBeTruthy();
+    });
+  });
+
+  describe('with nullish data', () => {
+    beforeEach(() => {
+      render(<PostsList filteredPosts={null} />);
+    });
+
+    it('should null', () => {
+      expect(screen.toJSON()).toBeNull();
     });
   });
 });

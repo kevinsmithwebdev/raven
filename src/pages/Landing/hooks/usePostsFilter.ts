@@ -1,13 +1,16 @@
 import {useNavigation} from '@react-navigation/native';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {DeviceEventEmitter} from 'react-native';
 import {EVENTS} from '../../../constants/events';
+import {Post} from '../../../types/jsonPlaceholder.types';
+import {usePostsZustand} from '../../../state/posts/posts.zustand';
 
 export interface UsePostFilterState {
   isFilterModalVisible: boolean;
   closeFilterModal: () => void;
   selectedFilterUserId: number | null;
   setSelectedFilterUserId: React.Dispatch<React.SetStateAction<number | null>>;
+  filteredPosts: Post[] | null;
 }
 
 export const usePostsFilter = (): UsePostFilterState => {
@@ -16,6 +19,7 @@ export const usePostsFilter = (): UsePostFilterState => {
   const [selectedFilterUserId, setSelectedFilterUserId] = useState<
     number | null
   >(null);
+  const {posts} = usePostsZustand();
 
   const closeFilterModal = useCallback(
     () => setIsFilterModalVisible(false),
@@ -40,10 +44,23 @@ export const usePostsFilter = (): UsePostFilterState => {
     };
   });
 
+  const filteredPosts = useMemo(() => {
+    if (!posts) {
+      return null;
+    }
+
+    if (selectedFilterUserId === null) {
+      return posts;
+    }
+
+    return posts.filter(post => post.userId === selectedFilterUserId);
+  }, [posts, selectedFilterUserId]);
+
   return {
     isFilterModalVisible,
     closeFilterModal,
     selectedFilterUserId,
     setSelectedFilterUserId,
+    filteredPosts,
   };
 };

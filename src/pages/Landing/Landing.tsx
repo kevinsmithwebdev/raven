@@ -15,12 +15,13 @@ const Landing = ({}) => {
     closeFilterModal,
     selectedFilterUserId,
     setSelectedFilterUserId,
+    filteredPosts,
   } = usePostsFilter();
 
   return (
     <>
       <View testID="landing-page">
-        <PostsList />
+        <PostsList filteredPosts={filteredPosts} />
       </View>
 
       <PostsFilterModal

@@ -3,6 +3,8 @@ import Landing from './Landing';
 import React from 'react';
 import {useLoadAllPosts} from '../../services/posts/useLoadAllPosts';
 import {useLoadUsers} from '../../services/users/useLoadUsers';
+import * as usePostsFilter from './hooks/usePostsFilter';
+import {mockPosts} from '../../__mocks__/posts.mocks';
 
 jest.mock('../../services/posts/useLoadAllPosts');
 jest.mock('../../services/users/useLoadUsers');
@@ -15,6 +17,11 @@ beforeEach(jest.clearAllMocks);
 describe('Landing', () => {
   describe('rendering', () => {
     beforeEach(() => {
+      jest
+        .spyOn(usePostsFilter, 'usePostsFilter')
+        .mockReturnValue({
+          filteredPosts: mockPosts,
+        } as usePostsFilter.UsePostFilterState);
       render(<Landing />);
     });
 
