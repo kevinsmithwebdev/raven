@@ -6,7 +6,7 @@ import PostView from '../pages/PostView/PostView';
 import {TouchableOpacity} from 'react-native';
 import FilterIcon from '../assets/icons/FilterIcon.tsx';
 import {DeviceEventEmitter} from 'react-native';
-import {EVENTS} from '../constants/envents.ts';
+import {EVENTS} from '../constants/events.ts';
 
 const Stack = createNativeStackNavigator();
 

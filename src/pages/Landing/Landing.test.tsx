@@ -6,6 +6,9 @@ import {useLoadUsers} from '../../services/users/useLoadUsers';
 
 jest.mock('../../services/posts/useLoadAllPosts');
 jest.mock('../../services/users/useLoadUsers');
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({setParams: jest.fn()}),
+}));
 
 beforeEach(jest.clearAllMocks);
 
