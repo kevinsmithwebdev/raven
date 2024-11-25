@@ -7,6 +7,7 @@ import {TouchableOpacity} from 'react-native';
 import FilterIcon from '../assets/icons/FilterIcon.tsx';
 import {DeviceEventEmitter} from 'react-native';
 import {EVENTS} from '../constants/events.ts';
+import RavenIcon from '../assets/icons/RavenIcon.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const NavigationStack = () => {
           component={Landing}
           options={({route}) => ({
             title: 'Raven Message App',
+            headerLeft: () => <RavenIcon />,
             headerRight: () => (
               <TouchableOpacity
                 hitSlop={20}
