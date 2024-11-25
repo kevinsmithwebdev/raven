@@ -23,17 +23,20 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     borderColor: '#ccc',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  textWrapper: {
+    flex: 1,
   },
   titleText: {
     fontWeight: 600,
+    color: '#222',
+    marginRight: 4,
   },
-  userTextWrapper: {
-    marginTop: 2,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+  bodyText: {
+    fontWeight: 400,
+    marginRight: 4,
   },
-  userText: {
-    fontStyle: 'italic',
-  },
-  loaderWrapper: {},
 });

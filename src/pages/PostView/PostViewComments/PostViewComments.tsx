@@ -1,4 +1,4 @@
-import {ActivityIndicator, Text, View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import PostSection from '../../../components/PostCard/PostSection/PostSection';
 import PostLine from '../../../components/PostLine/PostLine';
 import {Comment} from '../../../types/jsonPlaceholder.types';
@@ -6,17 +6,8 @@ import React from 'react';
 import SplitLineText from '../../../components/SplitLineText/SplitLineText';
 import {styles} from './PostViewComments.styles';
 import Bubble from '../../../components/Bubble/Bubble';
+import {getColorMappedToIndex} from '../../../utils/color/getColor';
 
-const colorPallette = [
-  '#A0C4FF',
-  '#FFADAD',
-  '#CAFFBF',
-  '#FFD6A5',
-  '#BDB2FF',
-  '#FDFFB6',
-  '#FFC6FF',
-  '#9BF6FF',
-];
 interface PostViewCommentsProps {
   comments: Comment[] | null;
 }
@@ -49,7 +40,7 @@ const PostViewComments = ({comments}: PostViewCommentsProps) => {
           <Bubble
             speaker={comment.email}
             isLeftSpeakerPosition={!!(idx % 2)}
-            backgroundColor={colorPallette[idx % colorPallette.length]}>
+            backgroundColor={getColorMappedToIndex(idx, true)}>
             <SplitLineText multiLineText={comment.body} label={comment.name} />
           </Bubble>
         </View>

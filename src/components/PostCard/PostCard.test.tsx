@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render, screen} from '@testing-library/react-native';
+import {fireEvent, render, screen, within} from '@testing-library/react-native';
 import PostCard from './PostCard';
 import * as useUsersZustand from '../../state/users/users.zustand';
 import * as usePostsZustand from '../../state/posts/posts.zustand';
@@ -47,8 +47,8 @@ describe('PostCard', () => {
       expect(screen.getByText(mockPost.title)).toBeTruthy();
     });
 
-    it('should have user name', () => {
-      expect(screen.getByText(mockUser.name)).toBeTruthy();
+    it('should have user avatar', () => {
+      expect(within(screen.getByTestId('avatar')).getByText('NR')).toBeTruthy();
     });
   });
 
@@ -67,18 +67,36 @@ describe('PostCard', () => {
   });
 
   describe('pressing card', () => {
-    beforeEach(() => {
-      render(<PostCard {...mockPost} />);
+    describe('when post found', () => {
+      beforeEach(() => {
+        render(<PostCard {...mockPost} />);
 
-      fireEvent.press(screen.getByRole('button', {name: 'post card'}));
+        fireEvent.press(screen.getByRole('button', {name: 'post card'}));
+      });
+
+      it('should call navigation with the correct params', () => {
+        expect(mockNavigate).toHaveBeenCalledTimes(1);
+        expect(mockNavigate).toHaveBeenCalledWith('PostView', {
+          postId: 43,
+          postTitle:
+            'eligendi iste nostrum consequuntur adipisci praesentium sit beatae perferendis',
+        });
+      });
     });
 
-    it('should call navigation with the correct params', () => {
-      expect(mockNavigate).toHaveBeenCalledTimes(1);
-      expect(mockNavigate).toHaveBeenCalledWith('PostView', {
-        postId: 43,
-        postTitle:
-          'eligendi iste nostrum consequuntur adipisci praesentium sit beatae perferendis',
+    describe('when post not found', () => {
+      beforeEach(() => {
+        render(<PostCard {...mockPost} id={-1} />);
+
+        fireEvent.press(screen.getByRole('button', {name: 'post card'}));
+      });
+
+      it('should call navigation with the correct params', () => {
+        expect(mockNavigate).toHaveBeenCalledTimes(1);
+        expect(mockNavigate).toHaveBeenCalledWith('PostView', {
+          postId: -1,
+          postTitle: '',
+        });
       });
     });
   });

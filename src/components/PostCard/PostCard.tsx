@@ -5,18 +5,18 @@ import {styles} from './PostCard.styles';
 import {useUsersZustand} from '../../state/users/users.zustand';
 import {useNavigation} from '@react-navigation/native';
 import {usePostsZustand} from '../../state/posts/posts.zustand';
+import Avatar from '../Avatar/Avatar';
+import {getColorMappedToIndex} from '../../utils/color/getColor';
 
-const PostCard = ({title, userId, id}: Post) => {
+const PostCard = ({title, userId, body, id}: Post) => {
   const navigation = useNavigation();
   const {getUserById} = useUsersZustand();
   const user = getUserById(userId);
   const {posts} = usePostsZustand();
 
-  const userName = user?.name || 'N/A';
-
   const handlePress = useCallback(() => {
     const postTitle = posts?.find(post => post.id === id)?.title ?? '';
-
+    console.log('asdf postTitle', postTitle);
     navigation.navigate('PostView', {postId: id, postTitle});
   }, [id, navigation, posts]);
 
@@ -28,12 +28,17 @@ const PostCard = ({title, userId, id}: Post) => {
       testID="post-card"
       onPress={handlePress}>
       <View style={styles.wrapper}>
-        <Text style={styles.titleText}>{title}</Text>
-
-        <View style={styles.userTextWrapper}>
-          <Text style={styles.userText}>{'— '}</Text>
-          <Text style={styles.userText}>{userName}</Text>
+        <View style={styles.textWrapper}>
+          <Text style={styles.titleText}>{title}</Text>
+          <Text style={styles.bodyText} numberOfLines={1}>
+            {body}
+          </Text>
         </View>
+
+        <Avatar
+          name={user?.name}
+          backgroundColor={getColorMappedToIndex(user?.id)}
+        />
       </View>
     </TouchableOpacity>
   );
