@@ -1,42 +1,37 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer, StaticParamList} from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import Landing from '../pages/Landing/Landing';
 import PostView from '../pages/PostView/PostView';
-import {TouchableOpacity} from 'react-native';
-import FilterIcon from '../assets/icons/FilterIcon.tsx';
-import {DeviceEventEmitter} from 'react-native';
-import {EVENTS} from '../constants/events.ts';
-import RavenIcon from '../assets/icons/RavenIcon.tsx';
+import LandingHeaderLeft from './components/LandingHeaderLeft/LandingHeaderLeft.tsx';
+import {renderLandingHeaderRight} from './components/LandingHeaderLeft/LandingHeader.ui.tsx';
+import {getPostViewOptions} from './LandingHeaderLeft.helpers.ts';
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 const NavigationStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+      <RootStack.Navigator>
+        <RootStack.Screen
           name="Landing"
           component={Landing}
           options={({route}) => ({
             title: 'Raven Message App',
-            headerLeft: () => <RavenIcon />,
-            headerRight: () => (
-              <TouchableOpacity
-                hitSlop={20}
-                onPress={() => DeviceEventEmitter.emit(EVENTS.filterIconPress)}>
-                <FilterIcon isDirty={route?.params?.isFilterDirty} />
-              </TouchableOpacity>
-            ),
+            headerLeft: LandingHeaderLeft,
+            headerRight: renderLandingHeaderRight(route),
           })}
         />
 
-        <Stack.Screen
+        <RootStack.Screen
           name="PostView"
           component={PostView}
-          options={({route}) => ({title: `Post: ${route.params.postName}`})}
+          options={getPostViewOptions}
         />
-      </Stack.Navigator>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

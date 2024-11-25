@@ -10,7 +10,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:dev": "jest --watch --coverage",
-    "prettier:write": "npx prettier . --write"
+    "prettier:write": "npx prettier . --write",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@react-navigation/elements": "^2.1.0",
