@@ -1,9 +1,6 @@
 import * as React from 'react';
-import {NavigationContainer, StaticParamList} from '@react-navigation/native';
-import {
-  createNativeStackNavigator,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Landing from '../pages/Landing/Landing';
 import PostView from '../pages/PostView/PostView';
 import LandingHeaderLeft from './components/LandingHeaderLeft/LandingHeaderLeft.tsx';

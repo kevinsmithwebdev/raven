@@ -31,7 +31,7 @@ describe('PostViewComments', () => {
       describe.each(mockComments)('for comments', ({email, body, name}) => {
         describe(`for comment for ${email}`, () => {
           it(`should have email label for ${email}`, () => {
-            expect(screen.getByText(`${email} says...`)).toBeTruthy();
+            expect(screen.getByText(email)).toBeTruthy();
           });
 
           it(`should have name ${name}`, () => {

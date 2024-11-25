@@ -5,7 +5,18 @@ import {Comment} from '../../../types/jsonPlaceholder.types';
 import React from 'react';
 import SplitLineText from '../../../components/SplitLineText/SplitLineText';
 import {styles} from './PostViewComments.styles';
+import Bubble from '../../../components/Bubble/Bubble';
 
+const colorPallette = [
+  '#A0C4FF',
+  '#FFADAD',
+  '#CAFFBF',
+  '#FFD6A5',
+  '#BDB2FF',
+  '#FDFFB6',
+  '#FFC6FF',
+  '#9BF6FF',
+];
 interface PostViewCommentsProps {
   comments: Comment[] | null;
 }
@@ -33,10 +44,14 @@ const PostViewComments = ({comments}: PostViewCommentsProps) => {
         isInline
       />
 
-      {comments.map(comment => (
+      {comments.map((comment, idx) => (
         <View style={styles.commentWrapper} key={comment.id}>
-          <Text style={styles.commentText}>{`${comment.email} says...`}</Text>
-          <SplitLineText multiLineText={comment.body} label={comment.name} />
+          <Bubble
+            speaker={comment.email}
+            isLeftSpeakerPosition={!!(idx % 2)}
+            backgroundColor={colorPallette[idx % colorPallette.length]}>
+            <SplitLineText multiLineText={comment.body} label={comment.name} />
+          </Bubble>
         </View>
       ))}
     </PostSection>

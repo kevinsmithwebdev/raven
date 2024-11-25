@@ -77,7 +77,8 @@ describe('PostCard', () => {
       expect(mockNavigate).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith('PostView', {
         postId: 43,
-        postName: 'optio dolor molestias sit',
+        postTitle:
+          'eligendi iste nostrum consequuntur adipisci praesentium sit beatae perferendis',
       });
     });
   });

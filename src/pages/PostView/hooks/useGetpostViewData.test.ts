@@ -61,8 +61,9 @@ describe('useGetPostViewData', () => {
 
     it('should return correct state', () => {
       const expectedState = {
-        post: mockPosts[mockPostId],
-        user: mockUsers[5],
+        post: mockPosts[mockPostId - 1],
+        user: mockUsers[4],
+
         comments: mockComments,
       };
 
@@ -162,10 +163,10 @@ describe('useGetPostViewData', () => {
     });
   });
 
-  describe('with non-existent postId', () => {
+  describe('with non-existent userId', () => {
     const nonExistentUserId = mockUsers.length + 999;
     const mockPostsWithNonExistentUserId = cloneDeep(mockPosts);
-    mockPostsWithNonExistentUserId[mockPostId].userId = nonExistentUserId;
+    mockPostsWithNonExistentUserId[mockPostId - 1].userId = nonExistentUserId;
 
     beforeEach(() => {
       useGetPostIdSpy = jest
@@ -205,7 +206,7 @@ describe('useGetPostViewData', () => {
 
     it('should return correct state', () => {
       const expectedState = {
-        post: mockPostsWithNonExistentUserId[mockPostId],
+        post: mockPostsWithNonExistentUserId[mockPostId - 1],
         user: null,
         comments: mockComments,
       };

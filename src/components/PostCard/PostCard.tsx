@@ -15,7 +15,9 @@ const PostCard = ({title, userId, id}: Post) => {
   const userName = user?.name || 'N/A';
 
   const handlePress = useCallback(() => {
-    navigation.navigate('PostView', {postId: id, postName: posts[id].title});
+    const postTitle = posts?.find(post => post.id === id)?.title ?? '';
+
+    navigation.navigate('PostView', {postId: id, postTitle});
   }, [id, navigation, posts]);
 
   return (

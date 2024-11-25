@@ -16,8 +16,13 @@ export const useGetPostViewData = (): UserGetPostViewDataState => {
   const {users} = useUsersZustand();
   const {comments} = useLoadComments({postId});
 
-  const post = postId === null ? null : posts?.[postId] ?? null;
-  const user = post?.userId ? users?.[post.userId] ?? null : null;
+  const post =
+    postId === null
+      ? null
+      : posts?.find(postFind => postFind.id === postId) ?? null;
+  const user = post?.userId
+    ? users?.find(userFind => userFind.id === post.userId) ?? null
+    : null;
 
   return {post, user, comments};
 };
