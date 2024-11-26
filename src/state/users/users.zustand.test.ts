@@ -1,14 +1,16 @@
-import {
-  act,
-  renderHook,
-  RenderHookResult,
-  waitFor,
-} from '@testing-library/react-native';
+import {act, renderHook, waitFor} from '@testing-library/react-native';
 import {useUsersZustand} from './users.zustand';
 import {UsersZustandMethods, UsersZustandState} from './users.zustand.types';
 import {mockUsers} from '../../__mocks__/users.mocks';
+import {RenderHookResult, Renderer} from '@testing-library/react-hooks';
 
-let renderedHook: RenderHookResult<UsersZustandState, undefined>;
+type HookResult = RenderHookResult<
+  unknown,
+  UsersZustandState,
+  Renderer<unknown>
+>;
+
+let renderedHook: HookResult;
 
 const expectedMethods: UsersZustandMethods = {
   getUserById: expect.any(Function),
@@ -29,7 +31,7 @@ const expectedInitialStateWithUsers: UsersZustandState = {
 describe('users zustand', () => {
   describe('initial state', () => {
     beforeEach(() => {
-      renderedHook = renderHook(useUsersZustand);
+      renderedHook = renderHook(useUsersZustand) as HookResult;
     });
 
     it('should return initial state', () => {
@@ -41,7 +43,7 @@ describe('users zustand', () => {
     describe('setUsers', () => {
       describe('can set full value', () => {
         beforeEach(() => {
-          renderedHook = renderHook(useUsersZustand);
+          renderedHook = renderHook(useUsersZustand) as HookResult;
 
           waitFor(() => expect(renderedHook.result.current.users).toBeNull());
 
@@ -57,7 +59,7 @@ describe('users zustand', () => {
 
       describe('can set null value', () => {
         beforeEach(() => {
-          renderedHook = renderHook(useUsersZustand);
+          renderedHook = renderHook(useUsersZustand) as HookResult;
 
           act(renderedHook.result.current.reset);
 
@@ -83,7 +85,7 @@ describe('users zustand', () => {
         const expectedUser = mockUsers.find(user => user.id === userId);
 
         beforeEach(() => {
-          renderedHook = renderHook(useUsersZustand);
+          renderedHook = renderHook(useUsersZustand) as HookResult;
 
           act(renderedHook.result.current.reset);
           act(() => renderedHook.result.current.setUsers(mockUsers));
@@ -106,7 +108,7 @@ describe('users zustand', () => {
         const userId = -1;
 
         beforeEach(() => {
-          renderedHook = renderHook(useUsersZustand);
+          renderedHook = renderHook(useUsersZustand) as HookResult;
 
           act(renderedHook.result.current.reset);
           act(() => renderedHook.result.current.setUsers(mockUsers));
@@ -127,7 +129,7 @@ describe('users zustand', () => {
         const userId = 3;
 
         beforeEach(() => {
-          renderedHook = renderHook(useUsersZustand);
+          renderedHook = renderHook(useUsersZustand) as HookResult;
 
           act(renderedHook.result.current.reset);
 
@@ -142,7 +144,7 @@ describe('users zustand', () => {
 
     describe('reset', () => {
       beforeEach(() => {
-        renderedHook = renderHook(useUsersZustand);
+        renderedHook = renderHook(useUsersZustand) as HookResult;
 
         act(() => renderedHook.result.current.setUsers(mockUsers));
         waitFor(() =>

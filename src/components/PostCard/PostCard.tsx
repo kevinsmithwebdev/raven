@@ -7,9 +7,10 @@ import {useNavigation} from '@react-navigation/native';
 import {usePostsZustand} from '../../state/posts/posts.zustand';
 import Avatar from '../Avatar/Avatar';
 import {getColorMappedToIndex} from '../../utils/color/getColor';
+import {StackNavigation} from '../../navigation/NavigationStack';
 
 const PostCard = ({title, userId, body, id}: Post) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
   const {getUserById} = useUsersZustand();
   const user = getUserById(userId);
   const {posts} = usePostsZustand();

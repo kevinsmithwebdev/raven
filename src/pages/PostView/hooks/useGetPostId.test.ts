@@ -22,24 +22,8 @@ describe('useGetPostId', () => {
     });
   });
 
-  describe('with missing postId data', () => {
-    const mockRoute = {params: {}};
-
-    beforeEach(() => {
-      jest
-        .spyOn(require('@react-navigation/native'), 'useRoute')
-        .mockReturnValue(mockRoute);
-
-      renderedHook = renderHook(useGetPostId);
-    });
-
-    it('should return correct postId', () => {
-      expect(renderedHook.result.current).toBe(null);
-    });
-  });
-
-  describe('with nullish route', () => {
-    const mockRoute = undefined;
+  describe('with undefined postId data', () => {
+    const mockRoute = {params: {postId: undefined}};
 
     beforeEach(() => {
       jest

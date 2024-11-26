@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import {FlatList} from 'react-native';
 import FilterLine from './FilterLine/FilterLine';
 import {User} from '../../../../types/jsonPlaceholder.types';
 
 interface PostsFilterModalBodyProps {
   users: User[];
-  setLocalUserId: React.Dispatch<React.SetStateAction<number | null>>;
+  setLocalUserId: Dispatch<SetStateAction<number | null>>;
   localUserId: number | null;
 }
 

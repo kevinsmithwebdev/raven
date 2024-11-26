@@ -1,12 +1,14 @@
 import {StyleSheet} from 'react-native';
 
+const AVATAR_SIZE = 30;
+
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 0,
     backgroundColor: 'blue',
-    height: 26,
-    width: 26,
-    borderRadius: 26,
+    height: AVATAR_SIZE,
+    width: AVATAR_SIZE,
+    borderRadius: AVATAR_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
   },

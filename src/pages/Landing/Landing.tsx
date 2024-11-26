@@ -1,6 +1,6 @@
 import React from 'react';
 import PostsList from '../../components/PostsList/PostsList';
-import {View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {useLoadAllPosts} from '../../services/posts/useLoadAllPosts';
 import {useLoadUsers} from '../../services/users/useLoadUsers';
 import {usePostsFilter} from './hooks/usePostsFilter';
@@ -19,7 +19,7 @@ const Landing = ({}) => {
   } = usePostsFilter();
 
   return (
-    <>
+    <SafeAreaView>
       <View testID="landing-page">
         <PostsList filteredPosts={filteredPosts} />
       </View>
@@ -30,7 +30,7 @@ const Landing = ({}) => {
         setSelectedFilterUserId={setSelectedFilterUserId}
         selectedFilterUserId={selectedFilterUserId}
       />
-    </>
+    </SafeAreaView>
   );
 };
 

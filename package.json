@@ -9,9 +9,11 @@
     "start": "react-native start",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:commit": "jest --coverage",
     "test:dev": "jest --watch --coverage",
     "prettier:write": "npx prettier . --write",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "pre-commit": "prettier:write, test:commit, tsc, lint"
   },
   "dependencies": {
     "@react-navigation/elements": "^2.1.0",

@@ -17,11 +17,9 @@ beforeEach(jest.clearAllMocks);
 describe('Landing', () => {
   describe('rendering', () => {
     beforeEach(() => {
-      jest
-        .spyOn(usePostsFilter, 'usePostsFilter')
-        .mockReturnValue({
-          filteredPosts: mockPosts,
-        } as usePostsFilter.UsePostFilterState);
+      jest.spyOn(usePostsFilter, 'usePostsFilter').mockReturnValue({
+        filteredPosts: mockPosts,
+      } as usePostsFilter.UsePostFilterState);
       render(<Landing />);
     });
 

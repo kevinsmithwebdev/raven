@@ -1,14 +1,16 @@
-import {
-  act,
-  renderHook,
-  RenderHookResult,
-  waitFor,
-} from '@testing-library/react-native';
+import {act, renderHook, waitFor} from '@testing-library/react-native';
+import {RenderHookResult, Renderer} from '@testing-library/react-hooks';
 import {usePostsZustand} from './posts.zustand';
 import {PostsZustandMethods, PostsZustandState} from './posts.zustand.types';
 import {mockPosts} from '../../__mocks__/posts.mocks';
 
-let renderedHook: RenderHookResult<PostsZustandState, undefined>;
+type HookResult = RenderHookResult<
+  unknown,
+  PostsZustandState,
+  Renderer<unknown>
+>;
+
+let renderedHook: HookResult;
 
 const expectedMethods: PostsZustandMethods = {
   setPosts: expect.any(Function),
@@ -28,7 +30,7 @@ const expectedInitialStateWithPosts: PostsZustandState = {
 describe('posts zustand', () => {
   describe('initial state', () => {
     beforeEach(() => {
-      renderedHook = renderHook(usePostsZustand);
+      renderedHook = renderHook(usePostsZustand) as HookResult;
     });
 
     it('should return initial state', () => {
@@ -40,7 +42,7 @@ describe('posts zustand', () => {
     describe('setPosts', () => {
       describe('can set full value', () => {
         beforeEach(() => {
-          renderedHook = renderHook(usePostsZustand);
+          renderedHook = renderHook(usePostsZustand) as HookResult;
 
           waitFor(() => expect(renderedHook.result.current.posts).toBeNull());
 
@@ -56,7 +58,7 @@ describe('posts zustand', () => {
 
       describe('can set null value', () => {
         beforeEach(() => {
-          renderedHook = renderHook(usePostsZustand);
+          renderedHook = renderHook(usePostsZustand) as HookResult;
 
           act(renderedHook.result.current.reset);
 
@@ -78,7 +80,7 @@ describe('posts zustand', () => {
 
     describe('reset', () => {
       beforeEach(() => {
-        renderedHook = renderHook(usePostsZustand);
+        renderedHook = renderHook(usePostsZustand) as HookResult;
 
         act(() => renderedHook.result.current.setPosts(mockPosts));
         waitFor(() =>

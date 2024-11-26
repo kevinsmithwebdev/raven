@@ -1,5 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {View, Modal} from 'react-native';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import {Modal, SafeAreaView} from 'react-native';
 import {useUsersZustand} from '../../../state/users/users.zustand';
 import {styles} from './PostsFilterModal.styles';
 import PostsFilterModalBody from './PostsFilterModalBody/PostsFilterModalBody';
@@ -9,7 +15,7 @@ import PostsFilterModalFooter from './PostsFilterModalFooter/PostsFilterModalFoo
 interface PostsFilterModal {
   isVisible: boolean;
   closeModal: () => void;
-  setSelectedFilterUserId: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedFilterUserId: Dispatch<SetStateAction<number | null>>;
   selectedFilterUserId: number | null;
 }
 
@@ -46,7 +52,7 @@ const PostsFilterModal = ({
 
   return (
     <Modal visible={isVisible} testID="posts-filter-modal">
-      <View style={styles.wrapper}>
+      <SafeAreaView style={styles.wrapper}>
         <PostsFilterModalHeader handleClose={handleClose} />
 
         <PostsFilterModalBody
@@ -59,7 +65,7 @@ const PostsFilterModal = ({
           clearLocalUserId={clearLocalUserId}
           applyUserId={applyUserId}
         />
-      </View>
+      </SafeAreaView>
     </Modal>
   );
 };

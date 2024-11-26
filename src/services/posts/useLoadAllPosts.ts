@@ -9,6 +9,13 @@ export const useLoadAllPosts = (): void => {
   const {data: posts = null} = useQuery('posts-data', loadAllPosts);
 
   useEffect(() => {
-    setPosts(posts);
+    // shuffling just to make the fake data a little more visually interesting
+    const shuffledPosts =
+      posts
+        ?.map(value => ({value, sort: Math.random()}))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({value}) => value) ?? null;
+
+    setPosts(shuffledPosts);
   }, [posts, setPosts]);
 };

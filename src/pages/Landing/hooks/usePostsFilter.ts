@@ -1,20 +1,28 @@
 import {useNavigation} from '@react-navigation/native';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {DeviceEventEmitter} from 'react-native';
 import {EVENTS} from '../../../constants/events';
 import {Post} from '../../../types/jsonPlaceholder.types';
 import {usePostsZustand} from '../../../state/posts/posts.zustand';
+import {StackNavigation} from '../../../navigation/NavigationStack';
 
 export interface UsePostFilterState {
   isFilterModalVisible: boolean;
   closeFilterModal: () => void;
   selectedFilterUserId: number | null;
-  setSelectedFilterUserId: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedFilterUserId: Dispatch<SetStateAction<number | null>>;
   filteredPosts: Post[] | null;
 }
 
 export const usePostsFilter = (): UsePostFilterState => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const [selectedFilterUserId, setSelectedFilterUserId] = useState<
     number | null

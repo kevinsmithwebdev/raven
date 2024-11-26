@@ -1,10 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {Dispatch, SetStateAction, useCallback} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {styles} from './FilterLine.styles';
 import {User} from '../../../../../types/jsonPlaceholder.types';
 
 interface FilterLineProps extends User {
-  setLocalUserId: React.Dispatch<React.SetStateAction<number | null>>;
+  setLocalUserId: Dispatch<SetStateAction<number | null>>;
   isSelected: boolean;
 }
 

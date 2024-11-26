@@ -13,7 +13,7 @@ export interface UseLoadCommentsState {
 export const useLoadComments = ({
   postId,
 }: UseLoadCommentsProps): UseLoadCommentsState => {
-  const {data} = useQuery({
+  const {data} = useQuery<Comment[] | null>({
     queryKey: ['comments-data', postId],
     queryFn: () => loadCommentsByPostId(postId),
   });
