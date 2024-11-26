@@ -41,9 +41,9 @@ describe('useLoadAllPosts', () => {
       renderHook(useLoadAllPosts);
     });
 
-    // it('should call setPosts with correct posts', () => {
-    //   expect(setPosts).toHaveBeenCalledTimes(1);
-    //   expect(setPosts).toHaveBeenCalledWith(null);
-    // });
+    it('should call setPosts with correct posts', () => {
+      expect(setPosts).toHaveBeenCalledTimes(1);
+      expect(setPosts).toHaveBeenCalledWith(null);
+    });
   });
 });
