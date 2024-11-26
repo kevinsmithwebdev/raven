@@ -179,13 +179,12 @@ describe('PostsFilterModal', () => {
             />,
           );
 
-          fireEvent.press(screen.getAllByTestId('filter-line')[lineToCheck]);
+          const line = screen.getAllByTestId('filter-line')[lineToCheck];
+
+          fireEvent.press(line);
 
           waitFor(() =>
-            expect(
-              screen.getAllByTestId('filter-line')[lineToCheck].props
-                .accessibilityState,
-            ).toBe(true),
+            expect(line.props.accessibilityState.selected).toBe(true),
           );
 
           fireEvent.press(screen.getByRole('button', {name: 'clear'}));
