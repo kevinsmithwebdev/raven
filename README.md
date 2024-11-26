@@ -21,6 +21,7 @@ The app has 100% unit test coverage and no TS or linter errors.
 I also should note I don't add a lot of comments. I know that there are different opinions about this subject. My philosophy is that comments are generally bad because:
 
 1. They are an excuse to not make the code documents itself.
+
 2. Comments don't tend to get maintained so given enough time, there is a good probability that they will become increasingly inaccurate. As Robert Martin says, "Comments are lies."
 
 I try to chose expressive variable, function, and module names. If you keep things small enough, well organized, and well named - then comments become less necessary. If I feel the urge to write a comment, I ask myself, "Could this be written more clearly?" I tend to only write comments if I feel the code cannot easily convey the information the future coder may need. But I've worked at places that commented more and can adjust to whatever the philosophy is where I work. This applies to all things - ultimately it is an agreement between the developing team about how to handle things.
@@ -29,5 +30,6 @@ I look forward to your feedback.
 
 Regards,
 Kevin Smith
-
 kevinsmithwebdev@gmail.com
+
+P.S. I should also comment that my github account is fairly sparse. When I'm working, I often just focus on the work that I'm doing for the company. I haven't had much time for side projects, having moved to Barcelona, and then Madrid, we're buying an apartment, and of course trying to learn Spanish. Of course my work github contributions are of course extensive, but I can't share that. My portfolio is similarly not up-to-date.
