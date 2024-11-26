@@ -15,6 +15,8 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9790AEFFEDD91B1FD8A9EAFE /* libPods-raven-ravenTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 820A0C716321A7CAA6927518 /* libPods-raven-ravenTests.a */; };
 		D92B7F95109395E629562321 /* libPods-raven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7903034C73A981ECD00D73 /* libPods-raven.a */; };
+		7136CD729EF348AC84DC568E /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17E45B36DEDE426A9907F1CD /* BootSplash.storyboard */; };
+		8078984E8ED64CC8B93D8C61 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C364CAA8CAC54ACF86E82636 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F3DD0E3B65589F48198C81B2 /* Pods-raven.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raven.debug.xcconfig"; path = "Target Support Files/Pods-raven/Pods-raven.debug.xcconfig"; sourceTree = "<group>"; };
 		F64F84433138AF2CB421C394 /* Pods-raven-ravenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raven-ravenTests.debug.xcconfig"; path = "Target Support Files/Pods-raven-ravenTests/Pods-raven-ravenTests.debug.xcconfig"; sourceTree = "<group>"; };
+		17E45B36DEDE426A9907F1CD /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "raven/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C364CAA8CAC54ACF86E82636 /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "raven/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				17E45B36DEDE426A9907F1CD /* BootSplash.storyboard */,
+				C364CAA8CAC54ACF86E82636 /* Colors.xcassets */,
 			);
 			name = raven;
 			sourceTree = "<group>";
@@ -247,6 +253,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				191FBE7CC35AA48F7F7DA710 /* PrivacyInfo.xcprivacy in Resources */,
+				7136CD729EF348AC84DC568E /* BootSplash.storyboard in Resources */,
+				8078984E8ED64CC8B93D8C61 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
