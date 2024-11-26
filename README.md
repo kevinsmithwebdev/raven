@@ -1,79 +1,33 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Hi,
 
-# Getting Started
+This is my messaging app for interview process.
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Obviously, it's hard to gauge how sophisticated to make the app, since the scope of what was expected wasn't defined. It's a small app but being a demo of skill, some things are necessarily over-engineered, for the sake of demonstration.
 
-## Step 1: Start the Metro Server
+I added some state management. It could be argued that it wouldn't be needed on this app since it is so small and React Query's caching could accomplish the same thing. I chose Zustand, being small and lightweight. Ordinarily I favor Redux (and especially like it paired with Redux Saga), but that definitely would have been overkill here.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+One odd thing I did was to randomize the posts when they are loaded. Without this, they are sorted by user and the landing screen is a little boring.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+I added navigation, which is more than this app needs, but is an important thing on larger apps and gives some nice transitions.
 
-```bash
-# using npm
-npm start
+Ordinarily an app would have i18n, but it isn't needed here and is trivial to add.
 
-# OR using Yarn
-yarn start
-```
+For an app like this I would rather be able to paginate the messages or load in batches, but that seemed like an unnecessary complication here.
 
-## Step 2: Start your Application
+I added an app icon and a splash screen.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+The app has 100% unit test coverage and no TS or linter errors.
 
-### For Android
+I also should note I don't add a lot of comments. I know that there are different opinions about this subject. My philosophy is that comments are generally bad because:
 
-```bash
-# using npm
-npm run android
+1. They are an excuse to not make the code documents itself.
+2. Comments don't tend to get maintained so given enough time, there is a good probability that they will become increasingly inaccurate. As Robert Martin says, "Comments are lies."
 
-# OR using Yarn
-yarn android
-```
+I try to chose expressive variable, function, and module names. If you keep things small enough, well organized, and well named - then comments become less necessary. If I feel the urge to write a comment, I ask myself, "Could this be written more clearly?" I tend to only write comments if I feel the code cannot easily convey the information the future coder may need. But I've worked at places that commented more and can adjust to whatever the philosophy is where I work. This applies to all things - ultimately it is an agreement between the developing team about how to handle things.
 
-### For iOS
+I look forward to your feedback.
 
-```bash
-# using npm
-npm run ios
+Regards,
+Kevin Smith
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+kevinsmithwebdev@gmail.com
